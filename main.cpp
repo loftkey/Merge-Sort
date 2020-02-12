@@ -9,22 +9,24 @@ void CopyArray(int A[], int iBegin, int iEnd, int B[]);
 
 int main() {
     srand(time(NULL));
-    int arr1[10];
-    int arr2[10]{0};
+    int arr1[8];
+    int arr2[8]{0};
     for (auto& val : arr1) {
         val = rand() % 101;
     }
    
+    cout << "-----------------------------------" << endl;
     cout << "Before sort" << endl;
     for (auto i : arr1)
         cout << i << ", ";
-    TopDownMergeSort(arr1, arr2, 10);
+    cout << endl << "-----------------------------------" << endl;
+    TopDownMergeSort(arr1, arr2, 8);
 
-
-    cout << endl << endl << "After sort" << endl;
+    cout << endl << "-----------------------------------" << endl;
+    cout << "After sort" << endl;
     for (auto i : arr1)
         cout << i << ", ";
-    cout << endl;
+    cout << endl << "-----------------------------------" << endl;
     return 0;
 }
 
@@ -32,7 +34,7 @@ int main() {
 void TopDownMergeSort(int A[], int B[], int n)
 {
     CopyArray(A, 0, n, B);           // one time copy of A[] to B[]
-    TopDownSplitMerge(B, 0, n, A);   // sort data from B[] into A[]
+    TopDownSplitMerge(A, 0, n, A);   // sort data from B[] into A[]
 }
 
 // Sort the given run of array A[] using array B[] as a source.
@@ -55,6 +57,10 @@ void TopDownSplitMerge(int B[], int iBegin, int iEnd, int A[])
 // Result is            B[ iBegin:iEnd-1   ].
 void TopDownMerge(int A[], int iBegin, int iMiddle, int iEnd, int B[])
 {
+    for (int l = iBegin; l < iEnd; l++)
+        cout << B[l] << ", ";
+    cout << "| ";
+
     int i = iBegin, j = iMiddle;
 
     // While there are elements in the left or right runs...
@@ -69,7 +75,13 @@ void TopDownMerge(int A[], int iBegin, int iMiddle, int iEnd, int B[])
             j = j + 1;
         }
     }
+
+    for (int l = iBegin; l < iEnd; l++)
+        cout << B[l] << ", ";
+    cout << endl;
+    
 }
+
 
 void CopyArray(int A[], int iBegin, int iEnd, int B[])
 {
