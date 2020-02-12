@@ -34,7 +34,7 @@ int main() {
 void TopDownMergeSort(int A[], int B[], int n)
 {
     CopyArray(A, 0, n, B);           // one time copy of A[] to B[]
-    TopDownSplitMerge(A, 0, n, A);   // sort data from B[] into A[]
+    TopDownSplitMerge(B, 0, n, A);   // sort data from B[] into A[]
 }
 
 // Sort the given run of array A[] using array B[] as a source.
