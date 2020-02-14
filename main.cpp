@@ -1,33 +1,33 @@
 #include <iostream>
 #include <time.h>
 using namespace std;
+const int arr_len = 2000;
+void print(int arr[], int begin, int end);
 
-void TopDownMergeSort(int A[], int B[], int n);
-void TopDownSplitMerge(int B[], int iBegin, int iEnd, int A[]);
-void TopDownMerge(int A[], int iBegin, int iMiddle, int iEnd, int B[]);
 void CopyArray(int A[], int iBegin, int iEnd, int B[]);
+void TopDownMerge(int A[], int iBegin, int iMiddle, int iEnd, int B[]);
+void TopDownSplitMerge(int B[], int iBegin, int iEnd, int A[]);
+void TopDownMergeSort(int A[], int B[], int n);
 
-int main() {
-    srand(time(NULL));
-    int arr1[8];
-    int arr2[8]{0};
-    for (auto& val : arr1) {
-        val = rand() % 101;
-    }
-   
-    cout << "-----------------------------------" << endl;
-    cout << "Before sort" << endl;
-    for (auto i : arr1)
-        cout << i << ", ";
-    cout << endl << "-----------------------------------" << endl;
-    TopDownMergeSort(arr1, arr2, 8);
+int main()
+{
+	srand(time(NULL));
+	int arr1[arr_len]{ 0 };
+	int arr2[arr_len]{ 0 };
 
-    cout << endl << "-----------------------------------" << endl;
-    cout << "After sort" << endl;
-    for (auto i : arr1)
-        cout << i << ", ";
-    cout << endl << "-----------------------------------" << endl;
-    return 0;
+	for (auto& val : arr1)
+		val = rand() % 101;
+
+	cout << "Before" << endl;
+	print(arr1, 0, arr_len);
+
+
+	// Merge Sort goes here
+    TopDownMergeSort(arr1, arr2, arr_len);
+
+	cout << "After" << endl;
+	print(arr1, 0, arr_len);
+
 }
 
 // Array A[] has the items to sort; array B[] is a work array.
@@ -57,10 +57,6 @@ void TopDownSplitMerge(int B[], int iBegin, int iEnd, int A[])
 // Result is            B[ iBegin:iEnd-1   ].
 void TopDownMerge(int A[], int iBegin, int iMiddle, int iEnd, int B[])
 {
-    for (int l = iBegin; l < iEnd; l++)
-        cout << B[l] << ", ";
-    cout << "| ";
-
     int i = iBegin, j = iMiddle;
 
     // While there are elements in the left or right runs...
@@ -75,16 +71,22 @@ void TopDownMerge(int A[], int iBegin, int iMiddle, int iEnd, int B[])
             j = j + 1;
         }
     }
-
-    for (int l = iBegin; l < iEnd; l++)
-        cout << B[l] << ", ";
-    cout << endl;
-    
+    //print(B, iBegin, iEnd);
 }
-
 
 void CopyArray(int A[], int iBegin, int iEnd, int B[])
 {
     for (int k = iBegin; k < iEnd; k++)
         B[k] = A[k];
+}
+
+
+void print(int arr[], int begin, int end)
+{
+	for (int i = begin; i < end; i++) {
+		cout << arr[i];
+		if (i < end - 1)
+			cout << ", ";
+	}			
+	cout << endl;
 }
